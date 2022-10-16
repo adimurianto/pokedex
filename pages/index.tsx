@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import { useState } from "react";
 import styles from '../styles/Home.module.css'
 import ItemPokemon from "../components/ItemPokemon";
+import axios from "axios";
 
 export let page_data = 0;
 export const length_item = 9;
@@ -9,8 +10,33 @@ export const length_item = 9;
 export default function Home(props: any) {
   const [pokemon, setPokemon] = useState(props.initialPokemon);
   const [page, setPage] = useState(0);
-  const num_data = page * length_item;
+  const [offset, setOffet] = useState(0);
+  const [itemlength, setLength] = useState(length_item);
   page_data = page;
+
+  const fetchPokemon = async (url:string, next:boolean) => {
+    const response = await fetch(url);
+    const nextPokemon = await response.json();
+
+    setOffet(next ? offset + itemlength : offset - itemlength);
+    setPokemon(nextPokemon);
+  }
+
+  const changePerPage = async (count: number) => {
+    setLength(count);
+    let newPokemon = {};
+    
+    try {
+      const url = "https://pokeapi.co/api/v2/pokemon/?limit="+itemlength+"&offset=0";
+      const result = await axios.get(url);
+      newPokemon = result.data;
+    } catch (error) {
+      newPokemon = {}
+    }
+
+    setOffet(0);
+    setPokemon(newPokemon);
+  }
 
   return (
     <Layout>
@@ -27,23 +53,41 @@ export default function Home(props: any) {
 
         <div className={styles.cards_body} >
           {
-            pokemon.results.map((monster:any, index:any) => (
-              <ItemPokemon item={monster} index={++index + num_data}/>
+            pokemon.results.map((monster:any, index:number) => (
+              <ItemPokemon key={index} item={monster} index={index + offset}/>
             ))
           }
         </div>
+
+        <div className={styles.pagination}>
+          <span>Per Page :</span>
+          
+          <button disabled={!pokemon.previous} className="disabled:bg-gray-500 px-3 py-1 bg-slate-900" onClick={() => fetchPokemon(pokemon.previous, false)}>
+            Prev
+          </button>
+          <button disabled={!pokemon.next} className="disabled:bg-gray-500 px-3 py-1 bg-slate-900" onClick={() => fetchPokemon(pokemon.next, true)}>
+            Next
+          </button>
+          <span>Total Data : {pokemon.count}</span>
+        </div>
       </article>
+
     </Layout>
   )
 }
 
 export async function getStaticProps(context: any) {
-  const response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit="+length_item+"&offset="+page_data);
-  const initialPokemon = await response.json();
-
-  return {
-    props: {
-      initialPokemon
+  try {
+    const result = await axios.get("https://pokeapi.co/api/v2/pokemon/?limit="+length_item+"&offset="+page_data);
+    const initialPokemon = result.data;
+    return {
+        props: {
+          initialPokemon
+        }
+    }
+  } catch (error) {
+    return {
+        props: {}
     }
   }
 }

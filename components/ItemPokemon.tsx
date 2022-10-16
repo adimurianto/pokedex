@@ -8,7 +8,7 @@ type ItemProps = {
 }
 
 const ItemPokemon = ({item, index}: ItemProps) => {
-    const id = ('000' + index).slice(-3);
+    const id = ('000' + (index + 1)).slice(-3);
     const pokeName = item.name[0].toUpperCase() + item.name.slice(1)
 
     return (
