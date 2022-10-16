@@ -15,19 +15,26 @@ export default function Home(props: any) {
   page_data = page;
 
   const fetchPokemon = async (url:string, next:boolean) => {
-    const response = await fetch(url);
-    const nextPokemon = await response.json();
+    let nextPokemon = {};
+
+    try {
+      const result = await axios.get(url);
+      nextPokemon = result.data;
+    } catch (error) {
+      nextPokemon = {}
+    }
 
     setOffet(next ? offset + itemlength : offset - itemlength);
     setPokemon(nextPokemon);
   }
 
-  const changePerPage = async (count: number) => {
-    setLength(count);
+  const changePerPage = async (count: any) => {
+    const num_length = parseInt(count);
+    setLength(num_length);
     let newPokemon = {};
-    
+
     try {
-      const url = "https://pokeapi.co/api/v2/pokemon/?limit="+itemlength+"&offset=0";
+      const url = "https://pokeapi.co/api/v2/pokemon/?limit="+num_length+"&offset=0";
       const result = await axios.get(url);
       newPokemon = result.data;
     } catch (error) {
@@ -61,6 +68,11 @@ export default function Home(props: any) {
 
         <div className={styles.pagination}>
           <span>Per Page :</span>
+          <select onChange={(event: React.ChangeEvent<HTMLSelectElement>) => changePerPage(event.target.value)} className={styles.selection}>
+            <option value="9">9</option>
+            <option value="15">15</option>
+            <option value="21">21</option>
+          </select>
           
           <button disabled={!pokemon.previous} className="disabled:bg-gray-500 px-3 py-1 bg-slate-900" onClick={() => fetchPokemon(pokemon.previous, false)}>
             Prev
