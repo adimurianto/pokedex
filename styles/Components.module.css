@@ -1,0 +1,88 @@
+.navbar_top {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px 140px;
+
+  position: absolute;
+  width: 100vw;
+  height: 32px;
+  left: 0px;
+  top: 0px;
+
+  background: #F7F8F8;
+  color: black;
+}
+
+.selectlang {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+  border: unset;
+  background-color: transparent;
+  color: #7b8082;
+  cursor: pointer;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 140px;
+
+  position: absolute;
+  width: 100vw;
+  height: 88px;
+  left: 0px;
+  top: 32px;
+}
+
+.logo {
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.listmenu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+  gap: 4px; 
+}
+
+.menu {
+  margin: 0 0.5rem;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.menu_active {
+  margin: 0 0.5rem;
+  font-size: 14px;
+  cursor: pointer;
+  color: #E6AB09;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 140px;
+  gap: 92px;
+
+  position: absolute;
+  width: 100vw;
+  left: 0px;
+  top: 120px;
+}
