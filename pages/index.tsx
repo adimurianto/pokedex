@@ -19,11 +19,12 @@ export default function Home(props: any) {
   const PokedexRef:any = useRef(null);
   page_data = page;
   
-  const gotoPokedex = () =>
+  const gotoPokedex = () => {
     window.scrollTo({
       top: PokedexRef.current.offsetTop,
       behavior: "smooth",
     });
+  }
 
   const fetchPokemon = async (url:string, next:boolean) => {
     let nextPokemon = {};

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import Head from "next/head";
 import Image from "next/image";
-import { NextPage } from 'next';
 import styles from '../styles/Components.module.css';
-import i18n from '../i18n';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
@@ -33,6 +31,12 @@ const Layout = ({children}: LayoutProps) => {
 
             <header>
                 <span className={styles.navbar_top}>
+                    <Image 
+                        alt="language"
+                        src={require('../assets/lang.png')}
+                        width="15"
+                        height="15"
+                    />&nbsp;&nbsp;
                     <select 
                         name='language' 
                         className={styles.selectlang} 

@@ -96,6 +96,11 @@
     order: 0;
     flex-grow: 0;
     margin: 2rem 0;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.1);
 }
 
 .img_item {

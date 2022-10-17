@@ -1,35 +1,39 @@
-import React, { useEffect, useState } from 'react';
 import Image from "next/image";
-import styles from '../styles/Home.module.css';
+import { useEffect, useState } from "react";
+import Layout from "../components/Layout";
+import styles from "../styles/Detail.module.css";
 import axios from "axios";
-import Router from 'next/router';
-import { useTranslation } from 'react-i18next';
 
-type ItemProps = {
-    item: any;
-    index: number;
-}
+export default function Detail() {
+    const queryString = location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get('id');
+    const name = urlParams.get('name');
 
-const ItemPokemon = ({item, index}: ItemProps) => {
-    const id = ('000' + (index + 1)).slice(-3);
-    const { t, i18n } = useTranslation();
-    const pokeName = item.name[0].toUpperCase() + item.name.slice(1);
+    const id_img = ('000' + (id)).slice(-3);
 
-    const [poke, setPoke] = useState({});
+    const [poke, setPoke] = useState(
+        {
+            weight:"", 
+            height:"",
+            types: []
+        }
+    );
+
     const [err, setErr] = useState(false);
 
     useEffect(()=>{
         const loadPokemon = async ()=>{
             try{
-                const res = await axios.get(item.url);
-                setPoke(res.data.types);
+                const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+                setPoke(res.data);
                 setErr(false);
             }catch(err){
                 setErr(true);
             }
         }
         loadPokemon();
-    },[item])
+    },[id])
 
     const concat = (result:any)=>{
         let i;
@@ -40,7 +44,7 @@ const ItemPokemon = ({item, index}: ItemProps) => {
         return str;
     }
 
-    const pokeData = concat(poke);
+    const pokeData = concat(poke.types);
 
     const typeSelect = (type:string)=>{
         switch(type){
@@ -101,40 +105,37 @@ const ItemPokemon = ({item, index}: ItemProps) => {
         }
     }
 
-    const detailPage = () => {
-        Router.push({
-            pathname: t("link")+'/detail', query: { name: pokeName, id: index+1 }
-        });
-    }
-
     return (
-        <div className={styles.card} onClick={() => detailPage()}>
-            <span className={styles.img_item} >
+      <Layout>
+        <div className={styles.detail_body}>
+            <div className={styles.img_poke}>
                 <Image
-                    alt={item.name}
-                    width={400}
-                    height={400}
-                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`}
+                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id_img}.png`}
+                    width="100%"
+                    height="100%"
                 />
-            </span>
-            <span className={styles.body_item}>
-                <span>#{id}</span>
-                <h2>{pokeName}</h2>
-                <span className={styles.labels}>
-                    {
-                        pokeData.map((data:string, index:number) => (
-                            <label 
-                                className={styles.label}
-                                style={{backgroundColor: typeSelect(data)}}
-                            >
-                                {data.toUpperCase()}
-                            </label>
-                        ))
-                    }
-                </span>
-            </span>
+            </div>
+            <div className={styles.detail_desc} >
+                <h2>{name}</h2>
+                <p><b>Weight :</b> {poke.weight}</p>
+                <p><b>Height :</b> {poke.height}</p>
+                <p>
+                    <b>Type :</b> 
+                    <span className={styles.labels}>
+                        {
+                            pokeData.map((data:string, index:number) => (
+                                <label 
+                                    className={styles.label}
+                                    style={{backgroundColor: typeSelect(data)}}
+                                >
+                                    {data.toUpperCase()}
+                                </label>
+                            ))
+                        }
+                    </span>
+                </p>
+            </div>
         </div>
-    );
-}; 
-
-export default ItemPokemon;
+      </Layout>
+    )
+}

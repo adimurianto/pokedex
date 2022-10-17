@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 export default function Type(initialPokemon: any) {
     return (
       <Layout>
-        <h1>Type</h1>
+        <h1>Comming Soon</h1>
       </Layout>
     )
 }
