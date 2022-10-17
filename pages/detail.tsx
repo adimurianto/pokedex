@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import styles from "../styles/Detail.module.css";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 export default function Detail() {
-    const queryString = location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const id = urlParams.get('id');
-    const name = urlParams.get('name');
+    const { query } = useRouter();
+    const id = query.id;
+    const name = query.name;
 
     const id_img = ('000' + (id)).slice(-3);
 
