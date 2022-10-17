@@ -1,7 +1,6 @@
 import Layout from "../components/Layout";
 
 export default function Type(initialPokemon: any) {
-    console.log(initialPokemon);
     return (
       <Layout>
         <h1>Type</h1>

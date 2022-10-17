@@ -3,5 +3,8 @@
     "link": "/en",
     "home": "Home",
     "pokemon_type": "Pokemon Type",
-    "cards_head_desc": "All Generation Totalling"
+    "cards_head_desc": "All Generation Totalling",
+    "banner_first": "All the Pokémon\ndata you'll ever\nneed in one place!",
+    "banner_seconds": "Thousands of data compiled into one place",
+    "banner_btn": "Check PokèDex"
 }

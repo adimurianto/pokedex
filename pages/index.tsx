@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styles from '../styles/Home.module.css';
 import ItemPokemon from "../components/ItemPokemon";
 import axios from "axios";
@@ -16,7 +16,14 @@ export default function Home(props: any) {
   const [offset, setOffet] = useState(0);
   const [itemlength, setLength] = useState(length_item);
   const { t, i18n } = useTranslation();
+  const PokedexRef:any = useRef(null);
   page_data = page;
+  
+  const gotoPokedex = () =>
+    window.scrollTo({
+      top: PokedexRef.current.offsetTop,
+      behavior: "smooth",
+    });
 
   const fetchPokemon = async (url:string, next:boolean) => {
     let nextPokemon = {};
@@ -53,6 +60,9 @@ export default function Home(props: any) {
     <Layout>
       <article className={styles.frame_banner}>
         <section className={styles.banner}>
+          <h1>{t("banner_first")}</h1>
+          <h4>{t("banner_seconds")}</h4>
+          <button onClick={() => gotoPokedex()}>{t("banner_btn")}</button>
         </section>
         <section className={styles.banner}>
           <Image 
@@ -65,9 +75,9 @@ export default function Home(props: any) {
         </section>
       </article>
 
-      <article className={styles.container} >
-        <div className={styles.cards_header}>
-          <strong><h1>PokèDex</h1></strong>
+      <article className={styles.container}>
+        <div className={styles.cards_header} ref={PokedexRef}>
+          <strong><h1>PokèDex</h1></strong> 
           <span>{t("cards_head_desc")}</span><br/>
           <span>{pokemon.count} Pokemon</span>
         </div>

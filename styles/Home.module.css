@@ -22,6 +22,32 @@
     padding: 3vw !important;
 }
 
+.banner h1 {
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 3vw;
+    line-height: 1.4;
+    color: #42494D;
+    margin-bottom: 0rem;
+}
+
+.banner h4 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1vw;
+    color: #7B8082;
+}
+
+.banner button {
+    padding: 8px 1.2rem;
+    background: #E6AB09;
+    border: unset;
+    margin-top: 1rem;
+    border-radius: 10px;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
 .container {
     width: 100vw;
     background-color: #FFCB3B;
@@ -118,4 +144,21 @@
     border-radius: 10px;
     background-color: transparent;
     margin: 1.5rem 1rem;
+}
+
+.labels {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: center;
+}
+
+.label {
+    padding: 5px 10px;
+    margin: 1vw 1vw;
+    gap: 10px;
+    width: 40%;
+    background: #E66D00;
+    border-radius: 25px;
+    color: #fff;
 }
