@@ -1,8 +1,11 @@
 import Layout from "../components/Layout";
 import { useState } from "react";
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.css';
 import ItemPokemon from "../components/ItemPokemon";
 import axios from "axios";
+import i18n from '../i18n';
+import { useTranslation } from 'react-i18next';
+import Image from "next/image";
 
 export let page_data = 0;
 export const length_item = 9;
@@ -12,6 +15,7 @@ export default function Home(props: any) {
   const [page, setPage] = useState(0);
   const [offset, setOffet] = useState(0);
   const [itemlength, setLength] = useState(length_item);
+  const { t, i18n } = useTranslation();
   page_data = page;
 
   const fetchPokemon = async (url:string, next:boolean) => {
@@ -47,14 +51,24 @@ export default function Home(props: any) {
 
   return (
     <Layout>
-      <article>
-        <h1>PokèDexmon</h1>
+      <article className={styles.frame_banner}>
+        <section className={styles.banner}>
+        </section>
+        <section className={styles.banner}>
+          <Image 
+              src={require("../assets/banner.png")} 
+              className={styles.logo} 
+              alt="logo"
+              width="100%"
+              height="100%"
+          />
+        </section>
       </article>
 
       <article className={styles.container} >
         <div className={styles.cards_header}>
           <strong><h1>PokèDex</h1></strong>
-          <span>All Generation Totalling</span><br/>
+          <span>{t("cards_head_desc")}</span><br/>
           <span>{pokemon.count} Pokemon</span>
         </div>
 

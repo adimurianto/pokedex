@@ -1,4 +1,7 @@
 {
     "test": "Test ID",
-    "link": "/id"
+    "link": "/id",
+    "home": "Beranda",
+    "pokemon_type": "Tipe Pokemon",
+    "cards_head_desc": "Total Semua Generasi"
 }

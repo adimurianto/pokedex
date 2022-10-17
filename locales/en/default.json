@@ -1,4 +1,7 @@
 {
     "test": "Test EN",
-    "link": ""
+    "link": "/en",
+    "home": "Home",
+    "pokemon_type": "Pokemon Type",
+    "cards_head_desc": "All Generation Totalling"
 }

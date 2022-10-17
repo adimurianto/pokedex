@@ -1,3 +1,27 @@
+.frame_banner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 10vw;
+    gap: 92px;
+
+    width: 100vw;
+}
+
+.frame_banner .banner {
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+    width: 50%;
+}
+
+.banner img {
+    width: 30vw !important;
+    height: 37vw !important;
+    padding: 3vw !important;
+}
+
 .container {
     width: 100vw;
     background-color: #FFCB3B;
