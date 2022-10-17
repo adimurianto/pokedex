@@ -4,8 +4,10 @@ import Layout from "../components/Layout";
 import styles from "../styles/Detail.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useTranslation } from 'react-i18next';
 
 export default function Detail() {
+    const { t, i18n } = useTranslation();
     const { query } = useRouter();
     const id = query.id;
     const name = query.name;
@@ -117,10 +119,10 @@ export default function Detail() {
             </div>
             <div className={styles.detail_desc} >
                 <h2>{name}</h2>
-                <p><b>Weight :</b> {poke.weight}</p>
-                <p><b>Height :</b> {poke.height}</p>
+                <p><b>{t("desc_weight")} :</b> {poke.weight}</p>
+                <p><b>{t("desc_height")} :</b> {poke.height}</p>
                 <p>
-                    <b>Type :</b> 
+                    <b>{t("desc_type")} :</b> 
                     <span className={styles.labels}>
                         {
                             pokeData.map((data:string, index:number) => (

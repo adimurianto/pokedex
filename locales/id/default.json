@@ -6,5 +6,8 @@
     "cards_head_desc": "Total Semua Generasi",
     "banner_first": "Semua data Pokemon\nyang Anda perlukan\ndi satu tempat!",
     "banner_seconds": "Ribuan data dikompilasi menjadi satu tempat",
-    "banner_btn": "Cek PokèDex"
+    "banner_btn": "Cek PokèDex",
+    "desc_weight": "Berat",
+    "desc_height": "Tinggi",
+    "desc_type": "Jenis"
 }

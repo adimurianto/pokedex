@@ -6,5 +6,8 @@
     "cards_head_desc": "All Generation Totalling",
     "banner_first": "All the Pokémon\ndata you'll ever\nneed in one place!",
     "banner_seconds": "Thousands of data compiled into one place",
-    "banner_btn": "Check PokèDex"
+    "banner_btn": "Check PokèDex",
+    "desc_weight": "Weight",
+    "desc_height": "Height",
+    "desc_type": "Type"
 }
