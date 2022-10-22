@@ -5,22 +5,23 @@ import styles from "../styles/Detail.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useTranslation } from 'react-i18next';
+import { IPokemon } from "../types/Pokemon";
+import { typeSelect } from "../utils/typeSelect";
+import { concatTypes } from "../utils/concatTypes";
+import { concatAbilities } from "../utils/concatAbilities";
 
-export default function Detail() {
+interface PokemonPageProps {
+    pokemon: IPokemon
+}
+
+export default function Detail<PokemonPageProps>(pokemon:any) {
     const { t, i18n } = useTranslation();
     const { query } = useRouter();
     const id = query.id;
     const name = query.name;
 
     const id_img = ('000' + (id)).slice(-3);
-
-    const [poke, setPoke] = useState(
-        {
-            weight:"", 
-            height:"",
-            types: []
-        }
-    );
+    const [poke, setPoke] = useState(pokemon);
 
     const [err, setErr] = useState(false);
 
@@ -28,6 +29,7 @@ export default function Detail() {
         const loadPokemon = async ()=>{
             try{
                 const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+                console.log(res.data);
                 setPoke(res.data);
                 setErr(false);
             }catch(err){
@@ -35,77 +37,11 @@ export default function Detail() {
             }
         }
         loadPokemon();
-    },[id])
+    },[id]);
 
-    const concat = (result:any)=>{
-        let i;
-        let str = [];
-        for( i in result){
-            str.push(result[i].type.name);
-        }
-        return str;
-    }
-
-    const pokeData = concat(poke.types);
-
-    const typeSelect = (type:string)=>{
-        switch(type){
-            case 'normal':
-                return "#a6a877";
-                break;
-            case 'grass':
-                return "#77c850";
-                break;
-            case 'ground':
-                return "#dfbf68";
-                break;
-            case 'fighting':
-                return "#bf3028";
-                break;
-            case 'rock':
-                return "#b8a137";
-                break;
-            case 'steel':
-                return "#b9b7cf";
-                break;
-            case 'fire':
-                return "#ee7f30";
-                break;
-            case 'electric':
-                return "#f7cf30";
-                break;
-            case 'flying':
-                return "#a98ff0";
-                break;
-            case 'psychic':
-                return "#f85687";
-                break;
-            case 'bug':
-                return "#a8b720";
-                break;
-            case 'dragon':
-                return "#6f38f6";
-                break;
-            case 'water':
-                return "#678fee";
-                break;
-            case 'ice':
-                return "#98d5d6";
-                break;
-            case 'poison':
-                return "#a03fa0";
-                break;
-            case 'dark':
-                return "#725847";
-                break;
-            case 'ghost':
-                return "#6e5896";
-                break;
-            case 'fairy':
-                return "#feaec7";
-                break;
-        }
-    }
+    console.log(poke.abilities);    
+    const listType = concatTypes(poke.types);
+    const listAbility = concatAbilities(poke.abilities);
 
     return (
       <Layout>
@@ -119,18 +55,30 @@ export default function Detail() {
             </div>
             <div className={styles.detail_desc} >
                 <h2>{name}</h2>
-                <p><b>{t("desc_weight")} :</b> {poke.weight}</p>
-                <p><b>{t("desc_height")} :</b> {poke.height}</p>
-                <p>
-                    <b>{t("desc_type")} :</b> 
-                    <span className={styles.labels}>
+                <p style={{display: 'flex', width: '100%'}}>
+                    <span style={{width:'50%'}}><b>{t("desc_weight")} :</b> {poke.weight}</span>
+                    <span style={{width: '50%'}}><b>{t("desc_height")} :</b> {poke.height}</span>
+                </p>
+                <p style={{display: 'flex', width: '100%'}}>
+                    <b>Abilities :</b>
+                    <ul style={{float: 'left', marginBlockStart: '0'}}>
                         {
-                            pokeData.map((data:string, index:number) => (
+                            listAbility.map((data:string, index:number) =>(
+                                <li>{ data }</li>
+                            ))
+                        }
+                    </ul>
+                </p>
+                <p style={{display: 'flex', width: '100%'}}>
+                    <b>{t("desc_type")} :</b> 
+                    <span className={styles.labels} style={{float: 'left', marginBlockStart: '0 !important'}}>
+                        {
+                            listType.map((data:string, index:number) => (
                                 <label 
                                     className={styles.label}
-                                    style={{backgroundColor: typeSelect(data)}}
+                                    style={{backgroundColor: typeSelect(data.toLowerCase())}}
                                 >
-                                    {data.toUpperCase()}
+                                    { data }
                                 </label>
                             ))
                         }
