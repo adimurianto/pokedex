@@ -1,2 +1,2 @@
 # pokedex
-Learn Next js &amp; Typescript
+Case Study - Frontend Web - Pokedex App
