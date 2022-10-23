@@ -6,18 +6,24 @@ import Router from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { typeSelect } from '../utils/typeSelect';
 import { concatTypes } from '../utils/concatTypes';
+import { Type } from '../types/Pokemon';
 
 type ItemProps = {
-    item: any;
+    key: number;
+    item: {name:'', url:''};
     index: number;
 }
 
-const ItemPokemon = ({item, index}: ItemProps) => {
+interface TypePokemonPageProps {
+    types: Type
+}
+
+const ItemPokemon = ({key, item, index}: ItemProps, {types}: TypePokemonPageProps) => {
     const id = ('000' + (index + 1)).slice(-3);
     const { t, i18n } = useTranslation();
     const pokeName = item.name[0].toUpperCase() + item.name.slice(1);
 
-    const [poke, setPoke] = useState({});
+    const [poke, setPoke] = useState(types);
     const [err, setErr] = useState(false);
 
     useEffect(()=>{
@@ -58,6 +64,7 @@ const ItemPokemon = ({item, index}: ItemProps) => {
                     {
                         pokeData.map((data:string, index:number) => (
                             <label 
+                                key={index}
                                 className={styles.label}
                                 style={{backgroundColor: typeSelect(data.toLowerCase())}}
                             >

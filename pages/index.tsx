@@ -86,7 +86,7 @@ export default function Home(props: any) {
         <div className={styles.cards_body} >
           {
             pokemon.results.map((monster:any, index:number) => (
-              <ItemPokemon key={index} item={monster} index={index + offset}/>
+              <ItemPokemon key={index + offset} item={monster} index={index + offset}/>
             ))
           }
         </div>

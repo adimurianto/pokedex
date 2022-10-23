@@ -48,6 +48,7 @@ export default function Detail<PokemonPageProps>(pokemon:any) {
         <div className={styles.detail_body}>
             <div className={styles.img_poke}>
                 <Image
+                    alt={name?.toString()}
                     src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id_img}.png`}
                     width="100%"
                     height="100%"
@@ -55,26 +56,27 @@ export default function Detail<PokemonPageProps>(pokemon:any) {
             </div>
             <div className={styles.detail_desc} >
                 <h2>{name}</h2>
-                <p style={{display: 'flex', width: '100%'}}>
+                <div style={{display: 'flex', width: '100%'}}>
                     <span style={{width:'50%'}}><b>{t("desc_weight")} :</b> {poke.weight}</span>
                     <span style={{width: '50%'}}><b>{t("desc_height")} :</b> {poke.height}</span>
-                </p>
-                <p style={{display: 'flex', width: '100%'}}>
+                </div>
+                <div style={{display: 'flex', width: '100%'}}>
                     <b>Abilities :</b>
                     <ul style={{float: 'left', marginBlockStart: '0'}}>
                         {
                             listAbility.map((data:string, index:number) =>(
-                                <li>{ data }</li>
+                                <li key={index}>{ data }</li>
                             ))
                         }
                     </ul>
-                </p>
-                <p style={{display: 'flex', width: '100%'}}>
+                </div>
+                <div style={{display: 'flex', width: '100%'}}>
                     <b>{t("desc_type")} :</b> 
                     <span className={styles.labels} style={{float: 'left', marginBlockStart: '0 !important'}}>
                         {
                             listType.map((data:string, index:number) => (
                                 <label 
+                                    key={index}
                                     className={styles.label}
                                     style={{backgroundColor: typeSelect(data.toLowerCase())}}
                                 >
@@ -83,7 +85,7 @@ export default function Detail<PokemonPageProps>(pokemon:any) {
                             ))
                         }
                     </span>
-                </p>
+                </div>
             </div>
         </div>
       </Layout>

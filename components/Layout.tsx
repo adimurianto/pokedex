@@ -23,10 +23,10 @@ const Layout = ({children}: LayoutProps) => {
 
     return (
         <div className={styles.container}>
-            <Head>
+            <Head key={'header'}>
                 <title>PokeDex</title>
-                <meta name="description" content="PokeDex App" />
-                <link rel="icon" href="/favicon.ico" />
+                <meta name="description" content="PokeDex App" defaultValue="PokeDex App"/>
+                <link rel="icon" href="/favicon.ico" defaultValue="/favicon.ico"/>
             </Head>
 
             <header>
@@ -41,8 +41,9 @@ const Layout = ({children}: LayoutProps) => {
                         name='language' 
                         className={styles.selectlang} 
                         onChange={(event: React.ChangeEvent<HTMLSelectElement>) => changeLanguage(event.target.value) }
+                        defaultValue={curr_lang == 'en' || curr_lang == '' ? 'en' : 'id'}
                     >
-                        <option value="en" selected={curr_lang == 'en'}>English</option>
+                        <option value="en" selected={curr_lang == 'en' || curr_lang == ''}>English</option>
                         <option value="id" selected={curr_lang == 'id'}>Indonesian</option>
                     </select>
                 </span>
