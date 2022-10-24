@@ -54,7 +54,7 @@ const ItemPokemon = ({key, item, index}: ItemProps, {types}: TypePokemonPageProp
                     alt={item.name}
                     width={400}
                     height={400}
-                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`}
+                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id}.png`}
                 />
             </span>
             <span className={styles.body_item}>

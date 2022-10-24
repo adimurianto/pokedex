@@ -9,6 +9,7 @@ import { IPokemon } from "../types/Pokemon";
 import { typeSelect } from "../utils/typeSelect";
 import { concatTypes } from "../utils/concatTypes";
 import { concatAbilities } from "../utils/concatAbilities";
+import OtherImages from "../components/OtherImages";
 
 interface PokemonPageProps {
     pokemon: IPokemon
@@ -49,7 +50,7 @@ export default function Detail<PokemonPageProps>(pokemon:any) {
             <div className={styles.img_poke}>
                 <Image
                     alt={name?.toString()}
-                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id_img}.png`}
+                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id_img}.png`}
                     width="100%"
                     height="100%"
                 />
@@ -87,6 +88,10 @@ export default function Detail<PokemonPageProps>(pokemon:any) {
                     </span>
                 </div>
             </div>
+        </div>
+        <div className={styles.other_images}>
+            <h4>Other Images :</h4>
+            <OtherImages/>
         </div>
       </Layout>
     )
