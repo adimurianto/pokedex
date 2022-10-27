@@ -5,17 +5,17 @@ import styles from "../styles/Detail.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useTranslation } from 'react-i18next';
-import { IPokemon } from "../types/Pokemon";
+import { IPokemon, Sprites } from "../types/Pokemon";
 import { typeSelect } from "../utils/typeSelect";
 import { concatTypes } from "../utils/concatTypes";
 import { concatAbilities } from "../utils/concatAbilities";
 import OtherImages from "../components/OtherImages";
 
 interface PokemonPageProps {
-    pokemon: IPokemon
+    pokemon: IPokemon,
 }
 
-export default function Detail<PokemonPageProps>(pokemon:any) {
+export default function Detail<PokemonPageProps>(pokemon:any, sprites:any) {
     const { t, i18n } = useTranslation();
     const { query } = useRouter();
     const id = query.id;
@@ -24,23 +24,32 @@ export default function Detail<PokemonPageProps>(pokemon:any) {
     const id_img = ('000' + (id)).slice(-3);
     const [poke, setPoke] = useState(pokemon);
 
+    const otherImg:any = [];
+    const [otherImages, setOtherImages] = useState(otherImg);
+
     const [err, setErr] = useState(false);
 
     useEffect(()=>{
         const loadPokemon = async ()=>{
             try{
                 const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-                console.log(res.data);
                 setPoke(res.data);
+
+                const resOtherImg = await axios.get(`https://pokeapi.co/api/v2/pokemon-form/${id}`);
+                let images = resOtherImg.data.sprites;
+                images = Object.values(images);
+                setOtherImages(images);
+
                 setErr(false);
             }catch(err){
-                setErr(true);
+                let message = 'Unknown Error'
+                if (err instanceof Error) message = err.message
+                console.log(err);
             }
         }
         loadPokemon();
     },[id]);
 
-    console.log(poke.abilities);    
     const listType = concatTypes(poke.types);
     const listAbility = concatAbilities(poke.abilities);
 
@@ -89,9 +98,16 @@ export default function Detail<PokemonPageProps>(pokemon:any) {
                 </div>
             </div>
         </div>
+
         <div className={styles.other_images}>
             <h4>Other Images :</h4>
-            <OtherImages/>
+            <div className={styles.images}>
+                {
+                    otherImages.map((data:string, index:number) =>(
+                        (data !== null ? <OtherImages key={index} link={data} /> : '')
+                    ))
+                }
+            </div>
         </div>
       </Layout>
     )

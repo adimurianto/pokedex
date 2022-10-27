@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import Image from "next/image";
-import styles from '../styles/Home.module.css';
-import axios from "axios";
-import Router from 'next/router';
-import { useTranslation } from 'react-i18next';
+import styles from '../styles/Detail.module.css';
 
-const OtherImages = () => {
+type ItemProps = {
+    key: number;
+    link: string;
+}
+
+const OtherImages = ({key, link}: ItemProps) => {
+    console.log(link);
     return (
-        <div>
+        <div key={key} className={styles.list_img}>
+            <Image
+                src={link}
+                alt={'img-'+key}
+                width={100}
+                height={100}
+            />
         </div>
     );
 }; 

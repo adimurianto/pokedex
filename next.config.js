@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['assets.pokemon.com']
+    domains: ['assets.pokemon.com', 'raw.githubusercontent.com']
   },
   swcMinify: true,
   i18n: {

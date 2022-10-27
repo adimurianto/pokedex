@@ -77,9 +77,48 @@
     align-items: flex-start;
     padding: 10px;
     gap: 10px;
-    width: 100vw;
+    width: 100%;
     flex: none;
     order: 1;
     align-self: stretch;
     flex-grow: 0;
+}
+
+.images {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px 0px 25px;
+    gap: 25px;
+
+    width: 100%;
+
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+    flex-flow: wrap;
+}
+
+.list_img {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vw;
+
+    width: auto;
+    height: auto;
+
+    flex: none;
+    order: 0;
+    /* flex-grow: 1; */
+}
+
+.list_img img {
+    background-color: #B3B6B8 !important;
+}
+
+.other_images h4 {
+    margin: 0;
 }
