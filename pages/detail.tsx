@@ -5,7 +5,7 @@ import styles from "../styles/Detail.module.css";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useTranslation } from 'react-i18next';
-import { IPokemon, Sprites } from "../types/Pokemon";
+import { IPokemon } from "../types/Pokemon";
 import { typeSelect } from "../utils/typeSelect";
 import { concatTypes } from "../utils/concatTypes";
 import { concatAbilities } from "../utils/concatAbilities";
