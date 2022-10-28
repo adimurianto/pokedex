@@ -13,7 +13,7 @@ const ItemsType = ({key, data}: ItemProps) => {
         <div className={styles.cards}>
             <div className={styles.card_body}>
                 {
-                    data.slice(0, 20).map((item:any, index:number) => (
+                    data.map((item:any, index:number) => (
                         <div key={index}>
                             <p>
                                 {item.pokemon.name}
