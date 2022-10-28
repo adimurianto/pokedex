@@ -344,6 +344,11 @@ export interface PastType {
     types: Type3[]
 }
 
+export interface ItemsType {
+    pokemon: Item
+    slot: number
+}
+
 export interface IPokemon {
     id: number
     name: string

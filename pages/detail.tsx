@@ -15,7 +15,7 @@ interface PokemonPageProps {
     pokemon: IPokemon,
 }
 
-export default function Detail<PokemonPageProps>(pokemon:any, sprites:any) {
+export default function Detail<PokemonPageProps>(pokemon:any) {
     const { t, i18n } = useTranslation();
     const { query } = useRouter();
     const id = query.id;

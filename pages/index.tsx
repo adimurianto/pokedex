@@ -67,7 +67,7 @@ export default function Home(props: any) {
         </section>
         <section className={styles.banner}>
           <Image 
-              src={require("../assets/banner.png")} 
+              src={require("../assets/banner.svg")} 
               className={styles.logo} 
               alt="logo"
               width="100%"
