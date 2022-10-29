@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import Image from "next/image";
 import styles from '../styles/Types.module.css';
+import ItemList from './ItemList';
 
 type ItemProps = {
-    key: string;
     data: any;
 }
 
-const ItemsType = ({key, data}: ItemProps) => {
-    console.log(data);
+const ItemsType = ({data}: ItemProps) => {
     return (
         <div className={styles.cards}>
-            <div className={styles.card_body}>
+            <table className={styles.card_body}>
                 {
-                    data.map((item:any, index:number) => (
-                        <div key={index}>
-                            <p>
-                                {item.pokemon.name}
-                            </p>
-                        </div>
-                    ))
+                    (
+                        data ?
+                            data.pokemon.slice(0, 10).map((item:any, index:number) => (
+                                <ItemList key={index} name={item.pokemon.name} url={item.pokemon.url} />
+                            ))
+                        :
+                            ''
+                    )
                 }
-            </div>
+            </table>
         </div>
     );
 }; 

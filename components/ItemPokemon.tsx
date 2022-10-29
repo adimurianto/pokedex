@@ -9,7 +9,6 @@ import { concatTypes } from '../utils/concatTypes';
 import { Type } from '../types/Pokemon';
 
 type ItemProps = {
-    key: number;
     item: {name:'', url:''};
     index: number;
 }
@@ -18,7 +17,7 @@ interface TypePokemonPageProps {
     types: Type
 }
 
-const ItemPokemon = ({key, item, index}: ItemProps, {types}: TypePokemonPageProps) => {
+const ItemPokemon = ({item, index}: ItemProps, {types}: TypePokemonPageProps) => {
     const id = ('000' + (index + 1)).slice(-3);
     const { t, i18n } = useTranslation();
     const pokeName = item.name[0].toUpperCase() + item.name.slice(1);

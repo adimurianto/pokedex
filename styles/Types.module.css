@@ -74,6 +74,7 @@
     width: 100%;
     min-height: 50vh;
     max-height: 60vh;
+    display: block;
 }
 
 .card_body::-webkit-scrollbar {
@@ -87,4 +88,49 @@
 .card_body::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
+}
+
+/* Style List Item */
+.card_body tr {
+    border-bottom: 1px solid black;
+    width: 100%;
+    padding-bottom: 1rem;
+    margin: 1rem 0;
+    display: flex;
+}
+
+.card_body tr td {
+    border-right: 1px solid black;
+    padding: 0.2rem;
+    text-align: center;
+}
+
+.card_body tr td:nth-child(1), .card_body tr td:nth-child(2) {
+    width: 20%;
+}
+
+.card_body tr td:nth-child(3), .card_body tr td:nth-child(4) {
+    width: 30%;
+}
+
+.card_body tr td:nth-child(4) {
+    border-right: unset;
+    text-align: left;
+}
+
+.labels {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: center;
+}
+
+.label {
+    padding: 5px 10px;
+    margin: 1vw 1vw;
+    gap: 10px;
+    width: 40%;
+    background: #E66D00;
+    border-radius: 25px;
+    color: #fff;
 }

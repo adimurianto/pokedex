@@ -3,20 +3,25 @@ import { useEffect, useState } from "react";
 import ItemsType from "../components/ItemsType";
 import Layout from "../components/Layout";
 import styles from '../styles/Types.module.css';
+import { PokemonByTypes } from "../types/PokemonByTypes";
 
-export default function Type(props: any) {
-  const [types, setTypes] = useState(props.initialPokemonTypes);
+interface PokemonPageProps {
+  items: PokemonByTypes,
+}
+
+export default function Type(props: any, {items}: PokemonPageProps) {
+  const types = props.initialPokemonTypes;
 
   const typeSelected = types.results[0].name[0].toUpperCase() + types.results[0].name.substr(1);
   const [typeSelect, setTypeSelect] = useState(typeSelected);
 
-  const [poke, setPoke] = useState();
+  const [poke, setPoke] = useState(items);
 
   useEffect(()=>{
     const loadPokemon = async ()=>{
         try{
             const res = await axios.get(`https://pokeapi.co/api/v2/type/${typeSelect.toLowerCase()}`);
-            setPoke(res.data.pokemon);
+            setPoke(res.data);
         }catch(err){
             let message = 'Unknown Error'
             if (err instanceof Error) message = err.message
@@ -24,9 +29,8 @@ export default function Type(props: any) {
         }
     }
     loadPokemon();
-  },[typeSelect]); 
+  },[typeSelect]);
   
-  console.log(poke);
   return (
     <Layout>
       <div className={styles.body_types}>
@@ -51,7 +55,7 @@ export default function Type(props: any) {
         </div>
 
         <div className={styles.contents}>
-          <h2>{`Pokemon with Type ${typeSelect[0].toUpperCase() + typeSelect.substr(1)}`}</h2>
+          <h2>{`Pokemon with Type ${typeSelect[0].toUpperCase() + typeSelect.substr(1)} #Top10`}</h2>
           <ItemsType key={typeSelect} data={poke} />
         </div>
       </div>

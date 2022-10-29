@@ -43,8 +43,8 @@ const Layout = ({children}: LayoutProps) => {
                         onChange={(event: React.ChangeEvent<HTMLSelectElement>) => changeLanguage(event.target.value) }
                         defaultValue={curr_lang == 'en' || curr_lang == '' ? 'en' : 'id'}
                     >
-                        <option value="en" selected={curr_lang == 'en' || curr_lang == ''}>English</option>
-                        <option value="id" selected={curr_lang == 'id'}>Indonesian</option>
+                        <option value="en" selected={curr_lang == 'en' || curr_lang == ''} disabled={curr_lang == 'en' || curr_lang == ''} >English</option>
+                        <option value="id" selected={curr_lang == 'id'} disabled={curr_lang == 'id'} >Indonesian</option>
                     </select>
                 </span>
 

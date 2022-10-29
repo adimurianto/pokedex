@@ -343,12 +343,6 @@ export interface PastType {
     generation: Generation
     types: Type3[]
 }
-
-export interface ItemsType {
-    pokemon: Item
-    slot: number
-}
-
 export interface IPokemon {
     id: number
     name: string

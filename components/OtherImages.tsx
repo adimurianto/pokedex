@@ -3,17 +3,16 @@ import Image from "next/image";
 import styles from '../styles/Detail.module.css';
 
 type ItemProps = {
-    key: number;
     link: string;
 }
 
-const OtherImages = ({key, link}: ItemProps) => {
+const OtherImages = ({link}: ItemProps) => {
     console.log(link);
     return (
-        <div key={key} className={styles.list_img}>
+        <div className={styles.list_img}>
             <Image
                 src={link}
-                alt={'img-'+key}
+                alt="other images"
                 width={100}
                 height={100}
             />
